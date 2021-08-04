@@ -2,7 +2,7 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-@WebServlet(name = "MovieServlet", urlPatterns = "/movies/*")
+//@WebServlet(name = "MovieServlet", urlPatterns = "/movies/*")
 
 public class MovieServlet extends HttpServlet {
 

@@ -14,7 +14,7 @@ The Movies API allows a client to perform CRUD operations on exposed endpoints u
     year: "String",
     director: "String",
     actors: "String",
-    imdbID: "String",
+    rating: "String",
     poster: "String",
     genre: "String",
     plot: "String"
@@ -55,7 +55,7 @@ redirect: 'follow'
     "year": "2008",
     "director": "Tarun Mansukhani",
     "actors": "Abhishek Bachchan, John Abraham, Priyanka Chopra",
-    "imdbID": "tt1185420",
+    "rating": "tt1185420",
     "poster": "https://m.media-amazon.com/images/M/MV5BOTE0NDU1ZTctYjRjYS00OTEyLTkzOWQtNmRiNDg5ZDU1ODBiXkEyXkFqcGdeQXVyNjQ2MjQ5NzM@._V1_SX300.jpg",
     "genre": "Comedy, Drama, Romance",
     "plot": "Two straight guys pretend to be gay in order to secure a Miami apartment. When both of them fall for their roommate Neha, hilarity ensues as they strive to convince one and all that they're gay whilst secretly trying to win her heart"
@@ -66,7 +66,7 @@ redirect: 'follow'
     "year": "1995",
     "director": "F. Gary Gray",
     "actors": "Ice Cube, Chris Tucker, Nia Long",
-    "imdbID": "tt0113118",
+    "rating": "tt0113118",
     "poster": "https://m.media-amazon.com/images/M/MV5BYmEwNjNlZTUtNzkwMS00ZTlhLTkyY2MtMjM2MzlmODQyZGVhXkEyXkFqcGdeQXVyNTI4MjkwNjA@._V1_SX300.jpg",
     "genre": "Comedy, Drama",
     "plot": "It's Friday, and Craig and Smokey must come up with $200 they owe a local bully or there won't be a Saturday."
@@ -77,7 +77,7 @@ redirect: 'follow'
     "year": "2011",
     "director": "David Yates",
     "actors": "Ralph Fiennes, Michael Gambon, Alan Rickman, Daniel Radcliffe",
-    "imdbID": "tt1201607",
+    "rating": "tt1201607",
     "poster": "https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
     "genre": "Adventure, Drama, Fantasy, Mystery",
     "plot": "Harry, Ron, and Hermione search for Voldemort's remaining Horcruxes in their effort to destroy the Dark Lord as the final battle rages on at Hogwarts."
@@ -98,7 +98,7 @@ redirect: 'follow'
     year: "2008",
     director: "Tarun Mansukhani",
     actors: "Abhishek Bachchan, John Abraham, Priyanka Chopra",
-    imdbID: "tt1185420",
+    rating: "tt1185420",
     poster: "https://m.media-amazon.com/images/M/MV5BOTE0NDU1ZTctYjRjYS00OTEyLTkzOWQtNmRiNDg5ZDU1ODBiXkEyXkFqcGdeQXVyNjQ2MjQ5NzM@._V1_SX300.jpg",
     genre: "Comedy, Drama, Romance",
     plot: "Two straight guys pretend to be gay in order to secure a Miami apartment. When both of them fall for their roommate Neha, hilarity ensues as they strive to convince one and all that they're gay whilst secretly trying to win her heart",
@@ -125,7 +125,7 @@ redirect: 'follow'
     year: "2008",
     director: "Tarun Mansukhani",
     actors: "Abhishek Bachchan, John Abraham, Priyanka Chopra",
-    imdbID: "tt1185420",
+    rating: "tt1185420",
     poster: "https://m.media-amazon.com/images/M/MV5BOTE0NDU1ZTctYjRjYS00OTEyLTkzOWQtNmRiNDg5ZDU1ODBiXkEyXkFqcGdeQXVyNjQ2MjQ5NzM@._V1_SX300.jpg",
     genre: "Comedy, Drama, Romance",
     plot: "Two straight guys pretend to be gay in order to secure a Miami apartment. When both of them fall for their roommate Neha, hilarity ensues as they strive to convince one and all that they're gay whilst secretly trying to win her heart",

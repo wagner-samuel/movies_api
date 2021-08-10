@@ -174,7 +174,7 @@ Now that your constructor has set the `connection` field, we are ready to open t
         
         // Build sql template
         StringBuilder sql = new StringBuilder("INSERT INTO movies (" +
-                "id, title, year, director, actors, imdbId, poster, genre, plot) " +
+                "id, title, year, director, actors, rating, poster, genre, plot) " +
                 "VALUES ");
 
 
@@ -197,7 +197,7 @@ Now that your constructor has set the `connection` field, we are ready to open t
             statement.setString((counter * 9) + 3, movie.getYear());
             statement.setString((counter * 9) + 4, movie.getDirector());
             statement.setString((counter * 9) + 5, movie.getActors());
-            statement.setString((counter * 9) + 6, movie.getImdbID());
+            statement.setString((counter * 9) + 6, movie.getrating());
             statement.setString((counter * 9) + 7, movie.getPoster());
             statement.setString((counter * 9) + 8, movie.getGenre());
             statement.setString((counter * 9) + 9, movie.getPlot());
@@ -313,7 +313,7 @@ public List<Movie> all() throws SQLException {
         rs.getString("year"),
         rs.getString("director"),
         rs.getString("actors"),
-        rs.getString("imdbId"),
+        rs.getString("rating"),
         rs.getString("poster"),
         rs.getString("genre"),
         rs.getString("plot")

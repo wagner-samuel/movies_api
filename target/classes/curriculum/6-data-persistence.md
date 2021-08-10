@@ -1,21 +1,23 @@
 # Data Persistence
 
 ---
+
 # Data Access Object (DAO)
 
-Most applications will use some form of DAO in order to allow the application to run
-queries/commands on a database table(s).
+Most applications will use some form of DAO in order to allow the application to run queries/commands on a database
+table(s).
 
 ---
 
-###Be sure to reference [this](documentation.md) frequently for help creating sample JSON
+### Be sure to reference [this](documentation.md) frequently for help creating sample JSON
 
-###1. Create a DAO Factory
+### 1. Create a DAO Factory
 
-A factory is a type of class which handles instantiation and configuration of objects,
-typically returning a ready-made object(s) to the calling code.
+A factory is a type of class which handles instantiation and configuration of objects, typically returning a ready-made
+object(s) to the calling code.
 
-Think of a `DaoFactory` as an actual car factory. 
+Think of a `DaoFactory` as an actual car factory.
+
 - You place an order to the factory
 - The factory handles putting together the car
 - You get a car and don't have to worry about how a brushless electric motor is constructed!
@@ -32,13 +34,16 @@ import data.movies.MySqlMoviesDao;
 public class DaoFactory {
 
   private static MoviesDao moviesDao;
-  private static Config config = new Config();
-  public enum ImplType {MYSQL, IN_MEMORY}; //Notice we have two values here
+  private static final Config config = new Config();
 
-  public static MoviesDao getMoviesDao(ImplType implementationType){
+  public enum ImplType {MYSQL, IN_MEMORY}
 
-    switch(implementationType){
-      case IN_MEMORY:{ //yet we have one switch case. We'll get to that!
+  //Notice we have two values here
+
+  public static MoviesDao getMoviesDao(ImplType implementationType) {
+
+    switch (implementationType) {
+      case IN_MEMORY: { //yet we have one switch case. We'll get to that!
         moviesDao = new InMemoryMoviesDao();
       }
     }
@@ -47,16 +52,17 @@ public class DaoFactory {
 }
 
 ```
+
 ---
-###2. DAO Interface
 
+### 2. DAO Interface
 
-To allow our code to not be tied down to one type of database,
-we will make a DAO interface which is agnostic of the final implementation of the DAO.
+To allow our code to not be tied down to one type of database, we will make a DAO interface which is agnostic of the
+final implementation of the DAO.
 
 This is particularly useful because it tells others that if they want to use our `MoviesDao`
-to create a new implementation (let's say a, `InMemoryMoviesDao`, `PostgresMoviesDao` or `SqlServerMoviesDao`),
-that class *must* implement a set of methods defined in `MoviesDao`.
+to create a new implementation (let's say a, `InMemoryMoviesDao`, `PostgresMoviesDao` or `SqlServerMoviesDao`), that
+class *must* implement a set of methods defined in `MoviesDao`.
 
 Define the following `MoviesDao` interface in your `data` package:
 
@@ -67,10 +73,15 @@ import java.util.List;
 
 public interface MoviesDao {
     List<Movie> all() throws SQLException;
+
     Movie findOne(int id);
+
     void insert(Movie movie);
+
     void insertAll(Movie[] movies) throws SQLException;
+
     void update(Movie movie) throws SQLException;
+
     void destroy(int id) throws SQLException;
 }
 
@@ -101,13 +112,12 @@ The `MoviesDao` interface draws a contract with its implementations which say th
 - destroy(int id)
     - annihilates one Movie. The obliterated Movie is chosen by id. The strong will survive.
 
-
 ---
-###3. DAO Implementation - InMemoryMoviesDao
 
-Before getting fully integrated with the database, 
-let's build an implementation of the `MoviesDao`, the `InMemoryMoviesDao`.
-We use this setup for testing our application without worrying about the database itself.
+### 3. DAO Implementation - InMemoryMoviesDao
+
+Before getting fully integrated with the database, let's build an implementation of the `MoviesDao`,
+the `InMemoryMoviesDao`. We use this setup for testing our application without worrying about the database itself.
 
 ```JAVA
 
@@ -129,68 +139,68 @@ import java.util.List;
 
 public class InMemoryMoviesDao implements MoviesDao {
 
-  private HashMap<Integer, Movie> moviesMap = getMoviesMap();
+    private HashMap<Integer, Movie> moviesMap = getMoviesMap();
 
-  @Override
-  public List<Movie> all() throws SQLException {
-    return moviesMap != null ? Arrays.asList(moviesMap.values()) : null;
-  }
-
-  @Override
-  public Movie findOne(int id) {
-    return moviesMap != null ? moviesMap.get(id) : null;
-  }
-
-  @Override
-  public void insert(Movie movie) {
-    int newId = moviesMap.keySet().size() + 1;
-    movie.setId(newId);
-    moviesMap.put(newId, movie);
-  }
-
-  @Override
-  public void insertAll(Movie[] movies) throws SQLException {
-    moviesMap = getMovieMap(Arrays.asList(movies));
-  }
-
-  @Override
-  public void update(Movie movie) throws SQLException {
-    if (moviesMap != null){
-      moviesMap.replace(movie.getId(), movie);
+    @Override
+    public List<Movie> all() throws SQLException {
+        return moviesMap != null ? Arrays.asList(moviesMap.values()) : null;
     }
-  }
 
-  @Override
-  public void destroy(int id) throws SQLException {
-    if (moviesMap != null){
-      moviesMap.remove(id);
+    @Override
+    public Movie findOne(int id) {
+        return moviesMap != null ? moviesMap.get(id) : null;
     }
-  }
 
-  private HashMap<Integer, Movie> getMoviesMap() {
-    try {
-      Reader reader = Files.newBufferedReader(Paths.get("movies.json"));
-      Type type = TypeToken.getParameterized(ArrayList.class, Movie.class).getType();
-      return getMovieMap(new Gson().fromJson(reader, type));
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      return null;
+    @Override
+    public void insert(Movie movie) {
+        int newId = moviesMap.keySet().size() + 1;
+        movie.setId(newId);
+        moviesMap.put(newId, movie);
     }
-  }
 
-  private HashMap<Integer, Movie> getMovieMap(List<Movie> movies) {
-    HashMap<Integer, Movie> movieHashMap = new HashMap<>();
-    for (Movie movie : movies) {
-      movieHashMap.put(movie.getId(), movie);
+    @Override
+    public void insertAll(Movie[] movies) throws SQLException {
+        moviesMap = getMovieMap(Arrays.asList(movies));
     }
-    return movieHashMap;
-  }
+
+    @Override
+    public void update(Movie movie) throws SQLException {
+        if (moviesMap != null) {
+            moviesMap.replace(movie.getId(), movie);
+        }
+    }
+
+    @Override
+    public void destroy(int id) throws SQLException {
+        if (moviesMap != null) {
+            moviesMap.remove(id);
+        }
+    }
+
+    private HashMap<Integer, Movie> getMoviesMap() {
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get("movies.json"));
+            Type type = TypeToken.getParameterized(ArrayList.class, Movie.class).getType();
+            return getMovieMap(new Gson().fromJson(reader, type));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    private HashMap<Integer, Movie> getMovieMap(List<Movie> movies) {
+        HashMap<Integer, Movie> movieHashMap = new HashMap<>();
+        for (Movie movie : movies) {
+            movieHashMap.put(movie.getId(), movie);
+        }
+        return movieHashMap;
+    }
 }
 
 ```
 
-
-###Now, we are ready to use the `MoviesDao` in our servlets!
+### Now, we are ready to use the `MoviesDao` in our servlets!
 
 ---
-##Next up: [Servlet Integration](7-servlet-integration.md)
+
+## Next up: [Servlet Integration](7-servlet-integration.md)

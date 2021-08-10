@@ -21,7 +21,7 @@ public class Movie implements Serializable {
     private String year;
     private String director;
     private String actors;
-    private String imdbId;
+    private String rating;
     private String poster;
     private String genre;
     private String plot;
@@ -70,7 +70,7 @@ public class Movie implements Serializable {
     private String year;
     private Profile director; // <-- LOOK HERE
     private Profile[] actors; // <-- AND HERE!
-    private String imdbId;
+    private String rating;
     private String poster;
     private String genre;
     private String plot;
